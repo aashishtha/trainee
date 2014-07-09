@@ -4,6 +4,7 @@
 	var editAge=document.getElementById("editAge");
 	var editAddress=document.getElementById("editAddress");
 	var editSubmit=document.getElementById("editSubmit");
+
 function Trainee()
 {
 	this.id;
@@ -13,6 +14,7 @@ function Trainee()
 }
 	//CREATE A DATABASE
 	var trainees=[];
+	
 	//CREATE A NEW INSTANCE OF OBJECT
 		var t1=new Trainee;
 			t1.id=1;t1.name="Shiva 1";t1.age=18;t1.address="Rupandehi";
@@ -43,8 +45,30 @@ for(var i=0;i<trainees.length;i++)
 	
 	
 }
+function validation()
+{	
+	var flag=true;
+	var validate=document.getElementById("validation");
+	if(editName.value=="")
+	{
+		validate.innerHTML+="Name Field cannot be left empty</br>";
+		flag=false;
+	}
+	if(editAge.value!=parseInt(editAge.value) || editAge.value=="")
+	{
+		validate.innerHTML+="Age Field cannot be left empty, must be Numbers</br>";
+		flag=false;
+	}
+	if(editAddress.value=="")
+	{
+		validate.innerHTML+="Address Field cannot be left empty</br>";
+		flag=false;
+	}
+	return flag;
+}	
 	//CREATES A ROW INSIDE ROW THAT IS PASSED IN
 	//PARAM : TR-->TABLE ROW, i--> CUR SN
+	
 function createRow(tr,i)
 {
 	var td1=document.createElement('td');
@@ -99,8 +123,10 @@ function deleteItem()
 	
 	//ALERT THAT DATA ARE BEING DELETED
 	console.log("Deleting data of "+selItem.name);
+	
 	//DELETE FROM ARRAY
 	trainees.splice(curIndex,1);
+	
 	//DELETE FROM DOM
 		var delItem=document.getElementById("row-"+curUID);
 		delItem.remove();
@@ -131,8 +157,15 @@ function clearEditField()
 	}
 function router()
 {
-	if(editUID.value=="")commitAdd();
-	else commitEdit();
+	var validate=document.getElementById("validation");
+	validate.innerHTML="";
+	if(validation())
+	{
+		if(editUID.value=="")
+			commitAdd();
+		else 
+			commitEdit();
+	}
 
 }
 function commitEdit()
@@ -144,10 +177,12 @@ function commitEdit()
 	trainees[curIndex].age=editAge.value;
 	trainees[curIndex].address=editAddress.value;
 	console.log('row-'+editUID.value);
+	
 	//NOW CHANGE THE DOM ELEMENTS
 	var selRow=document.getElementById('row-'+editUID.value);
 	selRow.innerHTML="";
 	selRow=createRow(selRow,findItemById(editUID.value));
+	
 	//NOW CLEAR THE EDIT FIELD
 	clearEditField();
 }
@@ -169,6 +204,8 @@ function commitAdd()
 		tr.id="row-"+(newItem.id);
 	tr=createRow(tr,trainees.length-1);
 	document.getElementById('tblTrainees').appendChild(tr);
+	
 	//NOW CLEAR THE EDIT FIELD
 	clearEditField();
 }
+
