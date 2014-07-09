@@ -9,11 +9,11 @@
 <div  class="edit-container" id="edit-container>
 	<form name="formEdit">
 		<table>
-			
+			<input type="hidden" id="editUID"/>
 			<tr><td>Name</td><td><input type="text" id="editName" /></td></tr>
 			<tr><td>Age</td><td><input type="text" id="editAge"/></td></tr>
 			<tr><td>Address</td><td><input type="text" id="editAddress"/></td></tr>
-			<tr><td></td><td><input type="button" value="Submit" id="editSubmit"/></td></tr>
+			<tr><td></td><td><input type="button" value="Submit" onclick="commitEdit()"id="editSubmit"/></td></tr>
 				
 			
 		</table>

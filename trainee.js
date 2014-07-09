@@ -27,10 +27,20 @@ function Trainee()
 	console.log(trainees);
 
 
-for(var i=0;i<trainees.length;i++)
+	for(var i=0;i<trainees.length;i++)
+	{
+		var tr=document.createElement('tr');
+			tr.id="row-"+(i+1);
+		tr=createRow(tr,i);
+		document.getElementById('tblTrainees').appendChild(tr);
+		
+		
+		
+	}
+	//CREATES A ROW INSIDE ROW THAT IS PASSED IN
+	//PARAM : TR-->TABLE ROW, i--> CUR SN
+function createRow(tr,i)
 {
-	var tr=document.createElement('tr');
-		tr.id="row-"+(i+1);
 	var td1=document.createElement('td');
 	var td2=document.createElement('td');
 	var td3=document.createElement('td');
@@ -62,11 +72,7 @@ for(var i=0;i<trainees.length;i++)
 	tr.appendChild(td3);
 	tr.appendChild(td4);
 	tr.appendChild(td5);
-	
-	document.getElementById('tblTrainees').appendChild(tr);
-	
-	
-	
+	return tr;
 }
 function findItemById(uid)
 {
@@ -92,7 +98,38 @@ function deleteItem()
 	//DELETE FROM DOM
 		var delItem=document.getElementById("row-"+curUID);
 		delItem.remove();
-			
 	console.log(trainees);
 }
-function editItem(){}
+function editItem()
+{
+	curUID=this.getAttribute('uid');
+	curIndex=findItemById(curUID);
+	selItem=trainees[curIndex];
+	
+	//--handles not needed--GET HANDLES OF ALL ELEMENTS OF EDIT PANEL
+	// editName=document.getElementById("editName");
+	// editAge=document.getElementById("editAge");
+	// editAddress=document.getElementById("editAddress");
+	// editSubmit=document.getElementById("editSubmit");
+	
+	//TRANSFER VALUE TO BE EDITED TO EDIT PANEL ALONG WITH UID
+	editUID.value=selItem.id;
+	editName.value=selItem.name;
+	editAge.value=selItem.age;
+	editAddress.value=selItem.address;
+	
+}
+function commitEdit()
+{
+	curIndex=editUID.value;
+	trainees[curIndex].name=editName.value;
+	trainees[curIndex].age=editAge.value;
+	trainees[curIndex].address=editAddress.value;
+	console.log('row-'+editUID.value);
+	//NOW CHANGE THE DOM ELEMENTS
+	var selRow=document.getElementById('row-'+editUID.value);
+	selRow.innerHTML="";
+	selRow=createRow(selRow,editUID.value);
+	
+	
+}
