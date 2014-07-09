@@ -1,0 +1,54 @@
+<html>
+<head>
+<style>
+	.ball{border-radius:100px;background:red;height:30px;width:30px;position:fixed;}
+</style>
+</head>
+<body>
+
+
+<script>
+	var ball={
+		left:200,
+		top:0
+	};
+	
+		var a=document.createElement('div');
+		a.className="ball";
+		a.id="ball";
+		a.style.left=ball.left;
+		a.style.top=ball.top;
+		var body=document.getElementsByTagName('body');
+		body[0].appendChild(a);
+		//a.style.top="200px";
+		
+	var incTop=10;var incLeft=10;
+	
+	//makeObj(a);
+	function move()
+	{
+		
+		scWidth=1000;
+		scHeight=500;
+		//console.log(ball.top);
+		if(ball.left>scWidth)
+		{incLeft=-10;}
+		else if(ball.left<=0)
+		{incLeft=10;}
+		
+		if(ball.top>scHeight)
+		{incTop=-10;}
+		else if(ball.top<=0)
+		{incTop=10;}
+		
+		ball.left += incLeft;
+		ball.top += incTop;
+		a.style.top = ball.top + "px";
+		a.style.left = ball.left+ "px";
+		//if object touch boundary then rebounce
+		
+	}
+	setInterval(move,50);
+</script>
+</body>
+</html>
