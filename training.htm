@@ -1,8 +1,26 @@
 <html>
 <head>
-
+<style>
+	.edit-container{margin:10 auto;display:table; background:rgb(224, 202, 173);padding:10px;}
+	.edit-button,.delete-button{text-decoration:none;margin:0 5px;}
+</style>
+</head>
 <body>
-<table id="tblTrainees" width="100%">
+<div  class="edit-container" id="edit-container>
+	<form name="formEdit">
+		<table>
+			
+			<tr><td>Name</td><td><input type="text" id="editName" /></td></tr>
+			<tr><td>Age</td><td><input type="text" id="editAge"/></td></tr>
+			<tr><td>Address</td><td><input type="text" id="editAddress"/></td></tr>
+			<tr><td></td><td><input type="button" value="Submit" id="editSubmit"/></td></tr>
+				
+			
+		</table>
+	</form>
+</div>
+<table id="tblTrainees" cellspacing="0" width="100%">
+
 	<tr style="background:orange;">
 		<td>S.N.</td>
 		<td>Name</td>
