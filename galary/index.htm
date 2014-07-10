@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head><style>
+	.main-wrapper{display:table;margin:0 auto;}
+		#upper img{width:400px;}
+		#upper{text-align:center;}
+		.thumbnailWrapper img{ margin:0px 2px;width:80px;}
+		.thumbnailWrapper{margin:0 auto;}
+		
+		#lower{clear:both;}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div class="main-wrapper">
+			<div id="upper"></div>
+			<div id="lower"></div>
+		</div>
+		<script>
+			//DEFAULT IMAGE TO LOAD IN BIG SCREEN
+			var defaultImg=1;
+			//CREATE BIG IMAGE ELEMENT
+			var bigImage=document.createElement('img');
+				//SET DEFAULT IMAGE NAME
+				bigImage.setAttribute('src','images/'+defaultImg+'.jpg');
+			//CREATE WRAPPER TO WRAP SMALL IMAGES TO ALIGN THEM IN CENTER
+			var thumbnailWrapper=document.createElement('div');
+				thumbnailWrapper.className="thumbnailWrapper";
+			//ARRAY TO STORE NAMES OF IMAGES
+			var images=[1,2,3,4,5];
+			//ARRAY TO HOLD THE SMALL IMAGES
+			var thumbnail=[];
+			for (i=0;i<images.length;i++)
+			{
+				//CREATE IMAGE ELEMENT FOR A THUMBNAIL IMAGE
+				thumbnail[i]=document.createElement('img');
+				thumbnail[i].setAttribute('src','images/'+images[i]+'.jpg');
+				thumbnail[i].onclick=changePic;
+				//APPEND THE SMALL IMAGES TO THE WRAPPER
+				thumbnailWrapper.appendChild(thumbnail[i]);
+			}
+			//APPEND THE BIGIMAGE TO ITS PARENT
+			document.getElementById('upper').appendChild(bigImage);
+			//APPEND THE THUMBNAIL'S WRAPPER TO ITS PARENT
+			document.getElementById('lower').appendChild(thumbnailWrapper);
+			
+			function changePic()
+			{
+			
+				var curPic=this.getAttribute('src');
+				console.log(curPic);
+				bigImage.setAttribute('src',curPic);
+				clearInterval(interval);
+				setTimeout(startSlideShow,2000);
+			}
+			/*SLIDESHOW SECTION STARTS FROM HERE*/
+			
+				//START SLIDESHOW ONCE IN THE BEGINNING
+				startSlideShow();
+				//THIS STORES THE HANDLE TO setInterval() THAT STARTS THE SLIDESHOW
+				var interval;
+				//FUNCTION TO START SLIDESHOW
+				function startSlideShow()
+				{
+					 interval=setInterval(slide,1000);
+				}
+				//STORES THE INDEX OF CURRENT IMAGE LOADED IN BIG SCREEN
+				var curState=0;
+				//ACTUAL FUCNTION TO SLIDE IMAGES IN BIG SCREEN
+				function slide()
+				{
+					
+					if(curState>images.length-1)curState=0;
+					//CHANGE PIC	
+					bigImage.setAttribute('src','images/'+images[curState]+'.jpg');
+					curState++;
+					
+				}
+		</script>
+	</body>
+	
+</html>
