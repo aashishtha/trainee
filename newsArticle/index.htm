@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		.main-wrapper{width:1002px;margin:0 auto;}
+		.content{width:700px;margin:0px auto;}
+		.popup-wrapper{width:100%;height:100%;position:fixed;background:rgba(0,0,0,0.6);left:0;top:0;display:none;}
+		.dialog{position:relative;margin:0 auto;margin-top:30px;display:table;background:white;}
+		.close-button-wrapper{position:absolute;top:-30px;right:-30px;cursor:pointer;}
+		.close-button-wrapper img{width:50px;}
+		.popup:hover{cursor:pointer;box-shadow:0 0 12px 4px blue;}
+	</style>
+</head>
+<body>
+<div id="popup-wrapper"class="popup-wrapper">
+	<div class="dialog">
+		<div class="close-button-wrapper" onclick="closePopup()"><img src="images/close.png" /></div>
+		<img src="" id="image"/>
+	</div>
+</div>
+	<div class="main-wrapper">
+		<div class="content">
+			<p>A computer is a general purpose device that can be programmed to <img class="popup" src="images/1.jpg"/>carry out a set of arithmetic or logical operations automatically. Since a sequence of operations can be readily changed, the computer can solve more than one kind of problem.
+
+				<img class="" src="images/2.jpg"/>Conventionally, a computer consists of at least one processing element, typically <img class="popup" src="images/3.jpg"/>a central processing unit (CPU), and some form of memory. The processing element carries out arithmetic and logic operations, and a sequencing and control unit can change the order of operations in response to stored information. Peripheral devices allow information to be retrieved from an external source, and the result of operations saved and retrieved.
+
+				In World War II, mechanical analog computers were used for specialized military applications. During this time the first electronic digital computers were developed. Originally they were the size of a large room, consuming as much power as several hundred modern personal computers (PCs).[1]
+
+				Modern computers based on integrated circuits are millions to <img class="popup" src="images/4.jpg"/>billions of times more capable than the early machines, and occupy a fraction of the space.[2] Simple computers are <img class="popup" src="images/5.jpg"/>small enough to fit into mobile devices, and mobile computers can be powered by small batteries. Personal computers in their various forms are icons of the Information Age and are what most people think of as “computers.” However, the embedded computers found in many devices from MP3 players to fighter aircraft and from toys to industrial robots are the most numerous.
+			</p>
+		</div>
+	</div>
+	<script>
+		var allImages=document.getElementsByClassName('popup');
+		//console.log(allImages);
+		for ( i=0;i<allImages.length;++i)
+		{
+			allImages[i].onclick=showPopup;
+			console.log(allImages[i]);
+			
+		}
+		
+		function showPopup()
+		{
+			document.getElementById('popup-wrapper').style.display="block";
+			document.getElementById('image').setAttribute('src',this.getAttribute('src'));
+		}
+		function closePopup()
+		{
+			document.getElementById('popup-wrapper').style.display="none";
+		}
+		
+	</script>
+</body>
+</html>
