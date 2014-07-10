@@ -30,6 +30,11 @@
 		}
 		.close-button{position:absolute;right:-15px;top:-15px;cursor:pointer;}
 		.close-button img{width:30px;}
+		.button-left img,.button-right img{width:50px;}
+		.button{position:absolute;bottom:-20px;}
+		.button-left{left:-40px;}
+		.button-right{right:-40px;}
+		
 		</style>
 		
 	</head>
@@ -40,6 +45,8 @@
 				<div class="close-button" onclick="closeDialog()">
 					<img src="images/close.png"/>
 				</div>
+				<div onclick="slideLeft()" class=" button button-left"><img src="images/left.png"/></div>
+				<div onclick="slideRight()" class="button button-right"><img src="images/right.png"/></div>
 				<div class="image-holder">
 				<img src="" id="popup-image"/>
 				</div>
@@ -69,6 +76,7 @@
 				//CREATE IMAGE ELEMENT FOR A THUMBNAIL IMAGE
 				thumbnail[i]=document.createElement('img');
 				thumbnail[i].setAttribute('src','images/'+images[i]+'.jpg');
+				thumbnail[i].setAttribute('index',i);
 				thumbnail[i].onclick=changePic;
 				//APPEND THE SMALL IMAGES TO THE WRAPPER
 				thumbnailWrapper.appendChild(thumbnail[i]);
@@ -84,6 +92,7 @@
 				var curPic=this.getAttribute('src');
 				console.log(curPic);
 				bigImage.setAttribute('src',curPic);
+				bigImage.setAttribute('index',this.getAttribute('index'));
 				clearInterval(interval);
 				setTimeout(startSlideShow,2000);
 			}
@@ -107,18 +116,38 @@
 					if(curState>images.length-1)curState=0;
 					//CHANGE PIC	
 					bigImage.setAttribute('src','images/'+images[curState]+'.jpg');
+					bigImage.setAttribute('index',curState);
 					curState++;
 					
 				}
+				var curImage;
 				function showPopup()
 				{
 					document.getElementById('popup-wrapper').style.display="block";
 					document.getElementById('popup-image').setAttribute('src',this.getAttribute('src'));
+					document.getElementById('popup-image').setAttribute('index',this.getAttribute('index'));
+					curImage=this.getAttribute('index');
 					
 				}
 				function closeDialog()
 				{
 					document.getElementById('popup-wrapper').style.display="none";
+				}
+				function slideLeft()
+				{
+				
+					if(curImage<=0)curImage=images.length-1;
+					else curImage--;
+					document.getElementById('popup-image').setAttribute('src','images/'+images[curImage]+'.jpg');
+					
+				}
+				function slideRight()
+				{
+				
+					if(curImage>=images.length-1)curImage=0;
+					else curImage++;
+					document.getElementById('popup-image').setAttribute('src','images/'+images[curImage]+'.jpg');
+					
 				}
 		</script>
 	</body>
